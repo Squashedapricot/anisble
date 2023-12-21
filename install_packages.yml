@@ -4,55 +4,25 @@
   tasks:
     # Ubuntu
 
-    - name: update packages
+    - name: update and install packages apache2 neofetch neovim htop
       apt:
         update_cache: yes
-      when: ansible_distribution == "Ubuntu"
-
-    - name: install apache2 package
-      apt:
-        name: apache2
-      when: ansible_distribution == "Ubuntu"
-
-    - name: install neofetch package
-      apt:
-        name: neofetch
-      when: ansible_distribution == "Ubuntu"
-
-    - name: install neovim package
-      apt:
-        name: neovim
-      when: ansible_distribution == "Ubuntu"
-
-    - name: install htop package
-      apt:
-        name: htop
+        name:
+          - apache2
+          - neofetch
+          - neovim
+          - htop
       when:
         ansible_distribution == "Ubuntu"
 
         #Fedora
 
-    - name: update packages
+    - name: update and install packages httpd neofetch neovim htop
       dnf:
         update_cache: yes
-      when: ansible_distribution == "Fedora"
-
-    - name: install httpd package
-      dnf:
-        name: httpd
-      when: ansible_distribution == "Fedora"
-
-    - name: install neofetch package
-      dnf:
-        name: neofetch
-      when: ansible_distribution == "Fedora"
-
-    - name: install neovim package
-      dnf:
-        name: neovim
-      when: ansible_distribution == "Fedora"
-
-    - name: install htop package
-      dnf:
-        name: htop
+        name:
+          - httpd
+          - neofetch
+          - neovim
+          - htop
       when: ansible_distribution == "Fedora"

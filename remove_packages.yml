@@ -2,7 +2,20 @@
 - hosts: all
   become: true
   tasks:
-    - name: remove neofetch package
+    - name: remove neofetch htop neovim package
       apt:
-        name: neofetch
+        name:
+          - neofetch
+          - htop
+          - neovim
         state: absent
+      when: ansible_distribution == "Ubuntu"
+
+    - name: remove neofetch htop neovim package
+      dnf:
+        name:
+          - neofetch
+          - htop
+          - neovim
+        state: absent
+      when: ansible_distribution == "Fedora"
