@@ -3,19 +3,8 @@
   become: true
   tasks:
     - name: remove neofetch htop neovim package
-      apt:
+      ansible.builtin.package:
         name:
-          - neofetch
           - htop
           - neovim
         state: absent
-      when: ansible_distribution == "Ubuntu"
-
-    - name: remove neofetch htop neovim package
-      dnf:
-        name:
-          - neofetch
-          - htop
-          - neovim
-        state: absent
-      when: ansible_distribution == "Fedora"

@@ -2,27 +2,10 @@
 - hosts: all
   become: true
   tasks:
-    # Ubuntu
-
     - name: update and install packages apache2 neofetch neovim htop
-      apt:
+      package: # Package module uses the machine's underlying package manager so there is no need to specify it for every distro
         update_cache: yes
         name:
-          - apache2
           - neofetch
           - neovim
           - htop
-      when:
-        ansible_distribution == "Ubuntu"
-
-        #Fedora
-
-    - name: update and install packages httpd neofetch neovim htop
-      dnf:
-        update_cache: yes
-        name:
-          - httpd
-          - neofetch
-          - neovim
-          - htop
-      when: ansible_distribution == "Fedora"
