@@ -2,10 +2,35 @@
 - hosts: all
   become: true
   tasks:
-    - name: update and install packages apache2 neofetch neovim htop
-      package: # Package module uses the machine's underlying package manager so there is no need to specify it for every distro
+    - name: install updates
+      dnf:
+        update_only: yes
         update_cache: yes
+      when: ansible_distribution == "Fedora"
+
+    - name: install updates (Ubuntu)
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: install apache and php for web Server
+      package:
         name:
-          - neofetch
-          - neovim
-          - htop
+          - apache2
+          - libapache2-mod-php
+        state: latest
+
+- hosts: file_server
+  become: true
+  tasks:
+    - name: install ranger and btop for file Server
+      package:
+        name:
+          - ranger
+          - btop
+          - mariadb-server
+        state: latest
