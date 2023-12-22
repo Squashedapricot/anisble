@@ -3,12 +3,14 @@
   become: true
   tasks:
     - name: install updates
+      tags: always
       dnf:
         update_only: yes
         update_cache: yes
       when: ansible_distribution == "Fedora"
 
     - name: install updates (Ubuntu)
+      tags: always
       apt:
         upgrade: dist
         update_cache: yes
@@ -18,6 +20,7 @@
   become: true
   tasks:
     - name: install apache and php for web Server
+      tags: apache,apache2,ubuntu
       package:
         name:
           - apache2
@@ -28,6 +31,7 @@
   become: true
   tasks:
     - name: install ranger and btop for file Server
+      tags: mariadb,btop,ranger,fedora
       package:
         name:
           - ranger
